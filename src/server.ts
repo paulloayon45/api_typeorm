@@ -1,9 +1,10 @@
+import "reflect-metadata";
 import "./_helpers/db"; 
 import express, { Request, Response, NextFunction } from "express";
 import cors from "cors";
-import "reflect-metadata";
 import { AppDataSource } from "./_helpers/db";
 import { errorHandler } from "./_middleware/error-handler";
+import userRouter from "./users/users.controller"
 import * as dotenv from "dotenv";
 
 dotenv.config();
@@ -23,6 +24,7 @@ AppDataSource.initialize()
 // Middlewares
 app.use(cors());
 app.use(express.json());
+app.use("/users",userRouter)
 
 // Example route (for testing)
 app.get("/", (req, res) => {
